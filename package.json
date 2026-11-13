@@ -1,0 +1,23 @@
+{
+  "name": "dsh-duel",
+  "version": "0.1.0",
+  "description": "两个模型互博：一个写，一个独立审。编写-审核对抗闭环，P0/P1 硬门禁，上下文隔离。",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "code-review",
+    "multi-model",
+    "adversarial-review",
+    "automation"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR-USERNAME/dsh-duel.git"
+  },
+  "main": "dist/index.js",
+  "files": ["dist"],
+  "engines": {
+    "node": ">=18"
+  }
+}
