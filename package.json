@@ -11,6 +11,7 @@
     "automation"
   ],
   "license": "MIT",
+<<<<<<< HEAD
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -67,5 +68,15 @@
     "@deepseek-ai/schemastery": "^3.19.0",
     "@types/node": "^22.0.0",
     "typescript": "^5.6.0"
+=======
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR-USERNAME/dsh-duel.git"
+  },
+  "main": "dist/index.js",
+  "files": ["dist"],
+  "engines": {
+    "node": ">=18"
+>>>>>>> 2e730201fdbcdaea7cdc36dcccea004d70d9dfd9
   }
 }

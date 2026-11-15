@@ -22,8 +22,11 @@ dsh plugin add dsh-duel
 
 ## 配置
 
+<<<<<<< HEAD
 下面是 profile 片段（插件 id 为 `duel`，与 `cordis.patch.yml` 的 insert 行对应）：
 
+=======
+>>>>>>> 2e730201fdbcdaea7cdc36dcccea004d70d9dfd9
 ```json
 {
   "duel": {
@@ -44,6 +47,7 @@ dsh plugin add dsh-duel
 }
 ```
 
+<<<<<<< HEAD
 | 字段 | 默认 | 说明 |
 |---|---|---|
 | `writer.provider` / `writer.model` | 继承父会话 | 编写层模型路由；只给 `model` 时沿用父会话 provider |
@@ -69,13 +73,30 @@ dsh plugin add dsh-duel
 ## 实战背书
 
 这套闭环在一次真实生产改造中跑了五批迭代，全部数据来自 331 万行生产日志（数据来自作者的一次生产改造，不能由本仓库复现）：
+=======
+| 字段 | 说明 |
+|---|---|
+| `writer.model` | 编写层模型 |
+| `reviewer.model` | 审核层模型。**与 writer 至少异构一个维度**（不同模型，或至少不同提示词人格） |
+| `reviewer.isolation` | 上下文隔离：审核者只见产物、不见过程 |
+| `gate.blockOn` | 硬门禁级别，命中即打回 |
+| `gate.maxRounds` | 同一问题 N 轮未修透 → 升级人工 |
+
+## 实战背书
+
+这套闭环在一次真实生产改造中跑了五批迭代，全部数据来自 331 万行生产日志：
+>>>>>>> 2e730201fdbcdaea7cdc36dcccea004d70d9dfd9
 
 - 审核 1 条 grep 抓出批量替换 P0（接口静默失效）
 - stub 实测戳穿「修了但没修透」（最坏耗时 12.06s 未降，TCP 拆建 ×6）
 - ISO 超时 **32,962 → 0**，报文成功率 **93.6% → 98.6%**
 - 审核抓到改造引入的写周期竞态回归（作者自查全绿之后）
 
+<<<<<<< HEAD
 详见实战记录：`docs/writer-reviewer-loop.md`（编写-审核循环规范）与 `docs/code-review-checklist.md`（审核 checklist）。
+=======
+详见实战记录：[S7 连接池改造：一套多模型编写-审核闭环是如何炼成的](https://github.com/YOUR-USERNAME/dsh-duel/blob/main/docs/case-s7-pool.md)
+>>>>>>> 2e730201fdbcdaea7cdc36dcccea004d70d9dfd9
 
 ## 审核层七条硬手法
 
@@ -87,6 +108,7 @@ dsh plugin add dsh-duel
 6. 大日志统计加 `grep -a`（二进制字节截断陷阱）
 7. 分位数实证（p50/p90/p99 + 超阈值事件计数，不看均值）
 
+<<<<<<< HEAD
 ## 开发
 
 ```bash
@@ -120,6 +142,8 @@ pnpm test         # 构建后跑 node:test（含仿 subagent 的端到端用例�
 - **C 组（上线后效果实证）本仓库无法验证**：分位数、前后窗口、瓶颈转移需要生产日志与上线后第三方复核，见 `docs/code-review-checklist.md`。
 - **`gate.maxRounds` 是总轮次上限**（不是按单个问题计数的连续未修轮次）；到达上限仍命中门禁即升级人工。
 
+=======
+>>>>>>> 2e730201fdbcdaea7cdc36dcccea004d70d9dfd9
 ## License
 
 MIT
