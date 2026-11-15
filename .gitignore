@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.npm-cache/
+.npmrc
+.pnpm-store/
+.scratch/
+.dsh-duel/
+*.tsbuildinfo

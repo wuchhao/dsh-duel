@@ -1,0 +1,44 @@
+# dsh-duel bundle patch — 在 profile 树上插入一行。
+# 任意字段都可以在 profiles/<name>/cordis.patch.yml 里按行覆盖（后层覆盖前层）。
+# 配置语义见 README「配置」一节；模型路由留空表示继承父会话路由。
+- insert:
+    - id: duel
+      name: 'dsh-duel'
+      config:
+        writer:
+          # 编写层模型；省略 provider/model 时继承父会话的模型路由
+          # model: glm-4.7
+          # provider: deepseek
+          # maxTokens: 8192
+          # 追加在编写基础提示词之后的自定义要求
+          instruction: ''
+        reviewer:
+          # 审核层模型：与 writer 至少异构一个维度（不同模型，或至少不同提示词人格）
+          # model: deepseek-chat
+          # provider: deepseek
+          # maxTokens: 8192
+          instruction: ''
+          # 上下文隔离：审核者只见产物（交接包）、不见过程
+          isolation: true
+        gate:
+          # 命中即打回的级别；P0/P1 清零才出循环
+          blockOn:
+            - P0
+            - P1
+          # 同一问题最多循环几轮；超轮次按 escalate 处置
+          maxRounds: 3
+          # human：升级人工仲裁；stop：停在原地
+          escalate: human
+        # 需要落盘的交付物
+        deliverables:
+          - delivery-package
+          - review-report
+          - response-table
+        # 子代理后端：spawn 为独立新会话（上下文隔离）；fork 继承父会话
+        subagentProvider: spawn
+        # 交付物根目录（相对工作目录）
+        deliverableDir: .dsh-duel
+        # diff 字符上限，超出截断并标记
+        maxDiffChars: 200000
+        # 单次子代理调用的协作超时（毫秒）；不写表示不设截止
+        # timeoutMs: 900000
